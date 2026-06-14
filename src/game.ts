@@ -117,7 +117,7 @@ export class Game {
       x: nextWp.position.x - startWp.position.x,
       z: nextWp.position.z - startWp.position.z,
     };
-    const startHeading = Math.atan2(startDir.x, startDir.z);
+    const startHeading = Math.atan2(startDir.x, -startDir.z);
 
     const perp = { x: -startDir.z, z: startDir.x };
     const perpLen = Math.hypot(perp.x, perp.z);

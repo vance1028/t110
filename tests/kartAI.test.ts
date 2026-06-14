@@ -85,11 +85,11 @@ describe('Kart AI', () => {
 
     const startWp = aiData.idealLine[0];
     const nextWp = aiData.idealLine[1];
-    const heading = Math.atan2(nextWp.position.x - startWp.position.x, nextWp.position.z - startWp.position.z);
+    const heading = Math.atan2(nextWp.position.x - startWp.position.x, -(nextWp.position.z - startWp.position.z));
 
     const kartState = createKartState(startWp.position, heading);
     kartState.speed = 5;
-    kartState.velocity.z = 5 * Math.cos(heading);
+    kartState.velocity.z = -5 * Math.cos(heading);
     kartState.velocity.x = 5 * Math.sin(heading);
 
     const { input } = computeAIInput(kartState, aiState, aiData, 'medium');
@@ -122,12 +122,12 @@ describe('Kart AI', () => {
 
     const wp = aiData.idealLine[aiState.targetWaypointIndex];
     const nextWp = aiData.idealLine[aiState.targetWaypointIndex + 1];
-    const heading = Math.atan2(nextWp.position.x - wp.position.x, nextWp.position.z - wp.position.z);
+    const heading = Math.atan2(nextWp.position.x - wp.position.x, -(nextWp.position.z - wp.position.z));
 
     const kartState = createKartState(wp.position, heading);
     kartState.speed = 40;
     kartState.velocity.x = 40 * Math.sin(heading);
-    kartState.velocity.z = 40 * Math.cos(heading);
+    kartState.velocity.z = -40 * Math.cos(heading);
 
     const { input } = computeAIInput(kartState, aiState, aiData, 'hard');
 
@@ -163,7 +163,7 @@ describe('Kart AI', () => {
     const len = Math.hypot(dirX, dirZ);
     const perpX = -dirZ / len;
     const perpZ = dirX / len;
-    const heading = Math.atan2(dirX, dirZ);
+    const heading = Math.atan2(dirX, -dirZ);
 
     const offCenterPos = vec3(
       wp.position.x + perpX * 5,
@@ -187,12 +187,12 @@ describe('Kart AI', () => {
 
     const wp = aiData.idealLine[10];
     const nextWp = aiData.idealLine[11];
-    const heading = Math.atan2(nextWp.position.x - wp.position.x, nextWp.position.z - wp.position.z);
+    const heading = Math.atan2(nextWp.position.x - wp.position.x, -(nextWp.position.z - wp.position.z));
 
     const kartState = createKartState(wp.position, heading);
     kartState.speed = 80;
     kartState.velocity.x = 80 * Math.sin(heading);
-    kartState.velocity.z = 80 * Math.cos(heading);
+    kartState.velocity.z = -80 * Math.cos(heading);
 
     const { input } = computeAIInput(kartState, aiState, aiData, 'medium');
 

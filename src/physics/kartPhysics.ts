@@ -40,14 +40,14 @@ export function createKartState(position = vec3(), heading = 0): KartState {
 export function getForwardVector(heading: number) {
   return {
     x: Math.sin(heading),
-    z: Math.cos(heading),
+    z: -Math.cos(heading),
   };
 }
 
 export function getRightVector(heading: number) {
   return {
     x: Math.cos(heading),
-    z: -Math.sin(heading),
+    z: Math.sin(heading),
   };
 }
 

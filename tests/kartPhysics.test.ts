@@ -35,7 +35,7 @@ describe('Kart Physics', () => {
     state = updateKartPhysics(state, input, dt, DEFAULT_KART_CONFIG);
 
     expect(state.speed).toBeGreaterThan(0);
-    expect(state.velocity.z).toBeGreaterThan(0);
+    expect(state.velocity.z).toBeLessThan(0);
   });
 
   it('should not move when no input', () => {
@@ -53,7 +53,7 @@ describe('Kart Physics', () => {
   it('should slow down due to drag when coasting', () => {
     let state = createKartState();
     state.speed = 20;
-    state.velocity.z = 20;
+    state.velocity.z = -20;
     const input = { throttle: 0, brake: 0, steer: 0 };
     const dt = 0.1;
 
@@ -65,7 +65,7 @@ describe('Kart Physics', () => {
   it('should brake and reduce speed', () => {
     let state = createKartState();
     state.speed = 20;
-    state.velocity.z = 20;
+    state.velocity.z = -20;
     const input = { throttle: 0, brake: 1, steer: 0 };
     const dt = 0.1;
 
@@ -77,7 +77,7 @@ describe('Kart Physics', () => {
   it('should turn when steering', () => {
     let state = createKartState();
     state.speed = 10;
-    state.velocity.z = 10;
+    state.velocity.z = -10;
     const input = { throttle: 0, brake: 0, steer: 1 };
     const dt = 0.1;
 
@@ -132,7 +132,7 @@ describe('Kart Physics', () => {
 
     state = updateKartPhysics(state, input, dt, DEFAULT_KART_CONFIG);
 
-    expect(state.position.z).toBeGreaterThan(0);
+    expect(state.position.z).toBeLessThan(0);
     expect(state.position.x).toBeCloseTo(0, 5);
   });
 

@@ -32,7 +32,7 @@ export function createKartMesh(color: number): THREE.Group {
 
   const noseGeom = new THREE.BoxGeometry(1.4, 0.3, 0.6);
   const nose = new THREE.Mesh(noseGeom, bodyMat);
-  nose.position.set(0, 0.3, 1.6);
+  nose.position.set(0, 0.3, -1.6);
   nose.castShadow = true;
   group.add(nose);
 
@@ -59,17 +59,17 @@ export function createKartMesh(color: number): THREE.Group {
 
   const rearWingGeom = new THREE.BoxGeometry(2.0, 0.1, 0.4);
   const rearWing = new THREE.Mesh(rearWingGeom, bodyMat);
-  rearWing.position.set(0, 1.3, -1.5);
+  rearWing.position.set(0, 1.3, 1.5);
   rearWing.castShadow = true;
   group.add(rearWing);
 
   const wingSupportGeom = new THREE.BoxGeometry(0.1, 0.5, 0.1);
   const leftSupport = new THREE.Mesh(wingSupportGeom, bodyMat);
-  leftSupport.position.set(-0.8, 1.05, -1.5);
+  leftSupport.position.set(-0.8, 1.05, 1.5);
   group.add(leftSupport);
 
   const rightSupport = new THREE.Mesh(wingSupportGeom, bodyMat);
-  rightSupport.position.set(0.8, 1.05, -1.5);
+  rightSupport.position.set(0.8, 1.05, 1.5);
   group.add(rightSupport);
 
   const exhaustGeom = new THREE.CylinderGeometry(0.1, 0.12, 0.5, 8);
@@ -80,7 +80,7 @@ export function createKartMesh(color: number): THREE.Group {
   });
   const exhaust = new THREE.Mesh(exhaustGeom, exhaustMat);
   exhaust.rotation.x = Math.PI / 2;
-  exhaust.position.set(0, 0.3, -1.8);
+  exhaust.position.set(0, 0.3, 1.8);
   group.add(exhaust);
 
   return group;
@@ -88,10 +88,10 @@ export function createKartMesh(color: number): THREE.Group {
 
 export function updateKartMesh(mesh: THREE.Group, state: KartState): void {
   mesh.position.set(state.position.x, state.position.y, state.position.z);
-  mesh.rotation.y = state.heading;
+  mesh.rotation.y = -state.heading;
 
   const tiltAmount = state.driftAngle * 0.3;
-  mesh.rotation.z = tiltAmount;
+  mesh.rotation.z = -tiltAmount;
 
   const speedFactor = Math.min(Math.abs(state.speed) / 30, 1);
   mesh.position.y += Math.abs(Math.sin(state.speed * 0.5)) * 0.05 * speedFactor;

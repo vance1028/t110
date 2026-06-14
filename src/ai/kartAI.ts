@@ -300,7 +300,7 @@ export function computeAIInput(
     const dist = vec2Length(toOther);
 
     if (dist < 15 && dist > 0) {
-      const forward = { x: Math.sin(kartState.heading), z: Math.cos(kartState.heading) };
+      const forward = { x: Math.sin(kartState.heading), z: -Math.cos(kartState.heading) };
       const forward2 = { x: forward.x, y: forward.z };
       const dot = vec2Dot(vec2Normalize(toOther), forward2);
 
@@ -333,7 +333,7 @@ export function computeAIInput(
     y: targetPoint.z - kartState.position.z,
   };
 
-  const targetAngle = Math.atan2(toTargetFinal.x, toTargetFinal.y);
+  const targetAngle = Math.atan2(toTargetFinal.x, -toTargetFinal.y);
   let angleDiff = normalizeAngle(targetAngle - kartState.heading);
 
   const maxSteer = 1;

@@ -41,8 +41,8 @@ export class FollowCamera {
     const dynamicDistance = this.config.distance + speedFactor * 4;
     const dynamicHeight = this.config.height + speedFactor * 1.5;
 
-    const backX = Math.sin(heading) * -dynamicDistance;
-    const backZ = Math.cos(heading) * -dynamicDistance;
+    const backX = Math.sin(heading) * dynamicDistance;
+    const backZ = Math.cos(heading) * dynamicDistance;
 
     this.targetPosition.set(
       kartState.position.x + backX,
@@ -50,8 +50,8 @@ export class FollowCamera {
       kartState.position.z + backZ
     );
 
-    const aheadX = Math.sin(heading) * this.config.lookAhead;
-    const aheadZ = Math.cos(heading) * this.config.lookAhead;
+    const aheadX = Math.sin(heading) * -this.config.lookAhead;
+    const aheadZ = Math.cos(heading) * -this.config.lookAhead;
 
     this.targetLookAt.set(
       kartState.position.x + aheadX,
@@ -65,9 +65,6 @@ export class FollowCamera {
 
     this.camera.position.copy(this.currentPosition);
     this.camera.lookAt(this.currentLookAt);
-
-    const tilt = kartState.driftAngle * this.config.tiltAmount;
-    this.camera.rotation.z = -tilt;
 
     const dynamicFov = 60 + speedFactor * 15;
     this.camera.fov = dynamicFov;
